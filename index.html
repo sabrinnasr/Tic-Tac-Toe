@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css"/>
+    <title>Tic tac toe</title>
+    <link rel="icon" href="image.png">
+</head>
+<body>
+    <div class="container">
+        <div class="X-score"> 
+            0
+        </div>
+        <div class="board" data-board>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+            <div class="cell" data-cell></div>
+        </div>
+
+        <div class="action-button">
+            <button class="reset-button" onclick="reset()">Reset</button>
+        </div>
+
+        <div class="O-score">
+                0
+        </div>
+
+        <div class="winning-message" data-winning-message>
+            <p class="winning-message-text" data-winning-message-text>X is the winner!</p>
+            <button class="winning-message-button" data-restart-button>Restart</button>
+        </div>
+
+    </div>
+<script src="script.js"></script>
+</body>
+</html>
