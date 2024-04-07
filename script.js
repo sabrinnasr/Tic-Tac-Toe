@@ -5,22 +5,27 @@ const winningMessage = document.querySelector("[data-winning-message]");
 const restartButton = document.querySelector("[data-restart-button]");
 const xScore = document.querySelector(".X-score");
 const oScore = document.querySelector(".O-score");
-let currentXScore = localStorage.getItem("currentXScore");
-let currentOScore = localStorage.getItem("currentOScore");
-console.log(`O = ${currentOScore}`,`X = ${currentXScore}`);
+let currentXScore = localStorage.getItem("currentXScore") || 0;
+let currentOScore = localStorage.getItem("currentOScore") || 0;
 const maxScore = 5;
 const oScoreBoardPoints = document.querySelectorAll(".O-score")[0].children;
 const xScoreBoardPoints = document.querySelectorAll(".X-score")[0].children;
 
 if (currentOScore > 0 || currentXScore > 0) {
+    let oldOScore = currentOScore
+    let oldXScore = currentXScore
     for (let index in oScoreBoardPoints) {
         if (index < currentOScore) {
-            oScoreBoardPoints[index].innerText = "o"
+            const scoreboardPointPosition = oScoreBoardPoints.length - oldOScore
+            oScoreBoardPoints[scoreboardPointPosition].innerText = "o"
+            oldOScore--
         }
     }
     for (let index in xScoreBoardPoints) {
         if (index < currentXScore) {
-            xScoreBoardPoints[index].innerText = "x"
+            const scoreboardPointPosition = xScoreBoardPoints.length - oldXScore
+            xScoreBoardPoints[scoreboardPointPosition].innerText = "x"
+            oldXScore--
         }
     }
 }
@@ -42,8 +47,8 @@ const winningCombinations = [
 
 const reset = () => {
     currentXScore = 0
-    localStorage.setItem("currentXScore", currentXScore)
     currentOScore = 0
+    localStorage.setItem("currentXScore", currentXScore)
     localStorage.setItem("currentOScore", currentOScore)
     restartButton.classList.remove("hidden")
     Array.from(oScoreBoardPoints).forEach(point => {
@@ -77,19 +82,21 @@ const endGame = (isDraw) => {
    } else {
     winningMessageTextElement.innerText = isCircleTurn ? "O's Wins!" : "X's Wins!";
     if(isCircleTurn) {
-        oScoreBoardPoints[currentOScore].innerText = "o"
         currentOScore++
+        const scoreboardPointPosition = oScoreBoardPoints.length - currentOScore
+        oScoreBoardPoints[scoreboardPointPosition].innerText = "o"
         localStorage.setItem("currentOScore", currentOScore)
-        console.log(currentOScore)
     } else {
-        xScoreBoardPoints[currentXScore].innerText = "x"
         currentXScore++
+        const scoreboardPointPosition = oScoreBoardPoints.length - currentXScore
+        xScoreBoardPoints[scoreboardPointPosition].innerText = "x"
         localStorage.setItem("currentXScore", currentXScore)
-        console.log(currentXScore)
     }
+
     if(currentXScore >= maxScore || currentOScore >= maxScore) {
         restartButton.classList.add("hidden")
     }
+
    }
 
    winningMessage.classList.add("show-winning-message")
