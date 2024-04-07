@@ -5,6 +5,7 @@
 }
 
 body {
+    font-family: Arial, Helvetica, sans-serif;
     height: 100vh;
     width: 100vw;
     background: linear-gradient(
@@ -20,25 +21,62 @@ body {
     width: 80vw;
     justify-content: center;
     margin: 100px auto;
-    border: 1px solid white;
     flex-direction: column;
     padding: 5px;
+    position: relative;
+    animation: containerShow 500ms ease;
 }
 
+@keyframes containerShow {
+    from {
+        opacity: 0;
+        transform: translate(200px);
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.container-content {
+    display: flex;
+    flex-direction: row;
+}
+
+.container-button{
+position: absolute;
+bottom: 5px;
+width: 100%;
+}
 
 .X-score {
-    border: 1px solid white;
     display: flex;
     align-items: center;
     padding: 8px;
+    flex-direction: column;
+    gap: 10px;
 
 }
 
-.O-score{
-    border: 1px solid white;
+.O-score {
     display: flex;
     align-items: center;
     padding: 8px;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.score-board-point {
+    height: 48px;
+    width: 48px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border: 2px dashed rgba(255, 255, 255, 0.4);
+    color: white;
+    font-size: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: inherit;
 }
 
 .board {
@@ -158,10 +196,16 @@ body {
 .reset-button {
     font-size: 2.0rem;
     cursor: pointer;
-    color: white;
-    background-color: transparent;
-    border-radius: 1.5rem;
-    padding: 3px 8px;
+    color: white; 
+    background-color: rgb(88, 24, 178);
+    border-radius: 8px;
+    padding: 8px 16px; 
+    border: none;
+}
+
+.reset-button:hover {
+    color: #661d92;
+    background-color: white;
 }
 
 .winning-message-button {
@@ -173,6 +217,10 @@ body {
     border: none;
     margin-top: 16px;
     color: white;
+}
+
+.winning-message-button.hidden {
+   display: none;
 }
 
 .winning-message-button:hover {

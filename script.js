@@ -7,9 +7,24 @@ const xScore = document.querySelector(".X-score");
 const oScore = document.querySelector(".O-score");
 let currentXScore = localStorage.getItem("currentXScore");
 let currentOScore = localStorage.getItem("currentOScore");
-xScore.innerHTML = currentXScore;
-oScore.innerHTML = currentOScore;
+console.log(`O = ${currentOScore}`,`X = ${currentXScore}`);
+const maxScore = 5;
+const oScoreBoardPoints = document.querySelectorAll(".O-score")[0].children;
+const xScoreBoardPoints = document.querySelectorAll(".X-score")[0].children;
 
+if (currentOScore > 0 || currentXScore > 0) {
+    for (let index in oScoreBoardPoints) {
+        if (index < currentOScore) {
+            oScoreBoardPoints[index].innerText = "o"
+        }
+    }
+    for (let index in xScoreBoardPoints) {
+        if (index < currentXScore) {
+            xScoreBoardPoints[index].innerText = "x"
+        }
+    }
+}
+    
 let audio = new Audio();
 
 let isCircleTurn;
@@ -25,6 +40,21 @@ const winningCombinations = [
     [2, 4, 6],
 ];
 
+const reset = () => {
+    currentXScore = 0
+    localStorage.setItem("currentXScore", currentXScore)
+    currentOScore = 0
+    localStorage.setItem("currentOScore", currentOScore)
+    restartButton.classList.remove("hidden")
+    Array.from(oScoreBoardPoints).forEach(point => {
+        point.innerText = ""
+    });
+    Array.from(xScoreBoardPoints).forEach(point => {
+        point.innerText = ""
+    });
+    startGame()
+}
+
 const startGame = () => {
     isCircleTurn = false;
     audio = new Audio('sounds/start.mp3')
@@ -37,7 +67,7 @@ const startGame = () => {
         cell.addEventListener("click", handleClick, { once: true });
     }
 
-    setBoardHoverClass();
+    setBoardHoverClass()
     winningMessage.classList.remove("show-winning-message");
 };
 
@@ -47,18 +77,22 @@ const endGame = (isDraw) => {
    } else {
     winningMessageTextElement.innerText = isCircleTurn ? "O's Wins!" : "X's Wins!";
     if(isCircleTurn) {
+        oScoreBoardPoints[currentOScore].innerText = "o"
         currentOScore++
         localStorage.setItem("currentOScore", currentOScore)
-        oScore.innerText = currentOScore
+        console.log(currentOScore)
     } else {
+        xScoreBoardPoints[currentXScore].innerText = "x"
         currentXScore++
         localStorage.setItem("currentXScore", currentXScore)
-        xScore.innerText = currentXScore
+        console.log(currentXScore)
+    }
+    if(currentXScore >= maxScore || currentOScore >= maxScore) {
+        restartButton.classList.add("hidden")
     }
    }
 
    winningMessage.classList.add("show-winning-message")
-   console.log(localStorage.getItem("currentXScore"))
 }
 
 const checkForWin = (currentPlayer) => {
