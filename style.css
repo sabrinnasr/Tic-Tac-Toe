@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Alumni+Sans+Pinstripe:ital@0;1&family=Share+Tech+Mono&display=swap');
+
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -10,10 +13,23 @@ body {
     width: 100vw;
     background: linear-gradient(
         90deg,
-        rgb(180, 162, 93) 0%,
-        rgb(100, 98, 98) 100%
-       
-    );
+        rgb(56, 86, 113) 0%,
+        rgb(100, 98, 98) 100%)
+}
+
+.title {
+  position: absolute;
+  top: 10px;     
+  left: 50%;      
+  transform: translateX(-50%); 
+  font-weight: bold;
+  font-size: 4rem;
+  font-family: 'Alumni Sans Pinstripe';
+  color: white;  
+}
+
+.title:hover {
+   scale: 1.1;
 }
 
 .container {
@@ -210,29 +226,33 @@ width: 100%;
 }
 
 .reset-button {
-    font-size: 2.0rem;
+    font-size: 2.5rem;
     cursor: pointer;
     color: white; 
-    background-color: #555144;
-    border-radius: 8px;
+    font-family: 'Alumni Sans Pinstripe';
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 28px;
     padding: 8px 16px; 
     border: none;
 }
 
 .reset-button:hover {
-    background-color: white;
-    color: #555144;
+    background-color: whitesmoke;
+    color: rgb(56, 86, 113);
 }
 
 .winning-message-button {
-    font-size: 2.5rem;
-    background-color: #73746b;
-    padding: 20px 20px;
+    font-size: 3rem;
     cursor: pointer;
-    border-radius: 5px;
+    color: white;
+    font-family: 'Alumni Sans Pinstripe';
+    font-weight: bold;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 28px;
+    padding: 12px 16px;
     border: none;
     margin-top: 16px;
-    color: white;
 }
 
 .winning-message-button.hidden {
@@ -240,8 +260,8 @@ width: 100%;
 }
 
 .winning-message-button:hover {
-    color: #73746b;
-    background-color: white;
+    background-color: whitesmoke;
+    color: rgb(56, 86, 113);
 }
 
 .winning-message-text {
