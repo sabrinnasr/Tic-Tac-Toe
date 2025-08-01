@@ -10,6 +10,7 @@ const maxScore = 5;
 
 let currentXScore = JSON.parse(localStorage.getItem("currentXScore")) || 0;
 let currentOScore = JSON.parse(localStorage.getItem("currentOScore")) || 0;
+let lastWinner = null;
 
 let audio = new Audio()
 let isCircleTurn;
@@ -46,6 +47,7 @@ const saveGameState = () => {
 const resetGame = () => {
     currentXScore = 0;
     currentOScore = 0;
+    lastWinner = null;
     saveGameState()
 
     xScoreBoardPoints.forEach(point => point.classList.remove("winning"))
@@ -59,7 +61,14 @@ const resetGame = () => {
 }
 
 const startGame = () => {
-    isCircleTurn = false;
+    if (lastWinner === "circle") {
+        isCircleTurn = true;
+    } else if (lastWinner === "x") {
+        isCircleTurn = false;
+    } else {
+        isCircleTurn = false;
+    }
+
     audio = new Audio("sounds/start.mp3")
     audio.play()
 
@@ -73,12 +82,16 @@ const startGame = () => {
     winningMessage.classList.remove("show-winning-message")
 }
 
+
 const endGame = (isDraw) => {
     if (isDraw) {
         winningMessageTextElement.innerText = "Draw!";
     } else {
-        winningMessageTextElement.innerText = isCircleTurn ? "O's Wins!" : "X's Wins!";
-        updateScore(isCircleTurn ? oScoreBoardPoints : xScoreBoardPoints, isCircleTurn ? "o" : "x")
+        const winner = isCircleTurn ? "circle" : "x";
+        winningMessageTextElement.innerText = winner === "circle" ? "O's Wins!" : "X's Wins!";
+        updateScore(winner === "circle" ? oScoreBoardPoints : xScoreBoardPoints, winner === "circle" ? "o" : "x")
+        
+        lastWinner = winner;
         saveGameState()
     }
 
