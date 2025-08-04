@@ -9,17 +9,22 @@
 
 body {
     font-family: Arial, Helvetica, sans-serif;
-    height: 100vh;
     width: 100vw;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
     background: linear-gradient(
         90deg,
         rgb(56, 86, 113) 0%,
         rgb(100, 98, 98) 100%)
+        
 }
 
 .title {
   position: absolute;
-  top: 10px;     
+  top: 100px;     
   left: 50%;      
   transform: translateX(-50%); 
   font-weight: bold;
@@ -33,15 +38,14 @@ body {
 }
 
 .container {
+    flex: 1;
     display: flex;
-    height: 80vh;
-    width: 80vw;
-    justify-content: center;
-    margin: 100px auto;
     flex-direction: column;
-    padding: 5px;
-    position: relative;
+    justify-content: center;
+    padding: 10px;
     animation: containerShow 500ms ease;
+    margin: auto 120px;
+    position: relative;
 }
 
 @keyframes containerShow {
@@ -235,6 +239,7 @@ width: 100%;
     border-radius: 28px;
     padding: 8px 16px; 
     border: none;
+    margin-bottom: 80px;
 }
 
 .reset-button:hover {
